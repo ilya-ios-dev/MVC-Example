@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,6 +20,21 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bE7-eL-QvS">
                         <rect key="frame" x="0.0" y="0.0" width="207" height="128"/>
                     </imageView>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sv6-mN-mgo">
+                        <rect key="frame" x="167" y="0.0" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="0gt-4M-zUu"/>
+                            <constraint firstAttribute="width" secondItem="sv6-mN-mgo" secondAttribute="height" id="rZT-OT-VYR"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain">
+                            <imageReference key="image" image="minus.circle.fill" catalog="system" symbolScale="large"/>
+                            <color key="baseForegroundColor" systemColor="systemRedColor"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="didSelectDeleteButton" destination="gTV-IL-0wX" eventType="touchUpInside" id="CjJ-mi-JTB"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -26,13 +42,22 @@
                 <constraint firstItem="bE7-eL-QvS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="9WP-ch-0gs"/>
                 <constraint firstItem="bE7-eL-QvS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QZe-er-GRf"/>
                 <constraint firstAttribute="trailing" secondItem="bE7-eL-QvS" secondAttribute="trailing" id="UyE-aZ-T1w"/>
+                <constraint firstItem="sv6-mN-mgo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="aSb-A3-iKL"/>
                 <constraint firstAttribute="bottom" secondItem="bE7-eL-QvS" secondAttribute="bottom" id="fWL-TS-idd"/>
+                <constraint firstAttribute="trailing" secondItem="sv6-mN-mgo" secondAttribute="trailing" id="peB-lX-6Yr"/>
             </constraints>
             <size key="customSize" width="207" height="128"/>
             <connections>
+                <outlet property="deleteButton" destination="sv6-mN-mgo" id="abf-qA-QWl"/>
                 <outlet property="imageView" destination="bE7-eL-QvS" id="6fO-ck-Cn2"/>
             </connections>
             <point key="canvasLocation" x="258.77862595419845" y="47.183098591549296"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="minus.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
