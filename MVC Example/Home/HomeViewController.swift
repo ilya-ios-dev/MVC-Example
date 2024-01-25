@@ -163,7 +163,7 @@ extension HomeViewController: HomeViewDelegate {
             case .unsplashImage(let id):
                 unsplashImages = try await imagesProvider.deleteImage(id)
             case .buildingImage(let id):
-                buildingImages = await buildingImagesProvider.deleteImage(id)
+                buildingImages = try await buildingImagesProvider.deleteImage(id)
             }
             
             updateViewState()
