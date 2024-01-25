@@ -10,9 +10,10 @@ class HomeView: UIView {
     private typealias Item = HomeViewState.Item
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
     private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
+    
+    private let layoutFactory: HomeViewLayoutFactory = HomeViewLayoutFactoryImpl()
 
-    private let loadingIndicator = UIActivityIndicatorView(style: .large)
-    private let loadingIndicatorContainer = UIView()
+    private let loadingIndicator = SquareLoadingIndicator()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
     private lazy var dataSource = createDataSource()
     
@@ -39,41 +40,17 @@ class HomeView: UIView {
         dataSource.apply(snapshot)
         
         if viewState.showLoadingIndicator {
-            showLoadingIndicator()
+            loadingIndicator.showLoadingIndicator()
         }
         else {
-            hideLoadingIndicator()
+            loadingIndicator.hideLoadingIndicator()
         }
-    }
-    
-    private func showLoadingIndicator() {
-        loadingIndicatorContainer.isHidden = false
-        loadingIndicator.startAnimating()
-    }
-    
-    private func hideLoadingIndicator() {
-        loadingIndicatorContainer.isHidden = true
-        loadingIndicator.stopAnimating()
     }
     
     private func setupUI() {
         collectionView.backgroundColor = .systemBackground
         addConstrainedSubview(collectionView)
-        
-        loadingIndicatorContainer.isHidden = true
-        addConstrainedSubview(loadingIndicatorContainer)
-        loadingIndicatorContainer.backgroundColor = .darkGray.withAlphaComponent(0.4)
-        
-        loadingIndicator.backgroundColor = .white
-        loadingIndicator.layer.cornerRadius = 8
-        loadingIndicatorContainer.addSubview(loadingIndicator)
-        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            loadingIndicator.centerXAnchor.constraint(equalTo: loadingIndicatorContainer.centerXAnchor),
-            loadingIndicator.centerYAnchor.constraint(equalTo: loadingIndicatorContainer.centerYAnchor),
-            loadingIndicator.heightAnchor.constraint(equalToConstant: 100),
-            loadingIndicator.widthAnchor.constraint(equalTo: loadingIndicator.heightAnchor)
-        ])
+        addConstrainedSubview(loadingIndicator)
     }
 }
 
@@ -85,125 +62,8 @@ private extension HomeView {
             guard let self, let section = self.viewState?.sections[index] else {
                 return nil
             }
-            
-            switch section.loadingState {
-            case .loaded:
-                return self.loadedSection(section)
-            case .needsReload(let state):
-                return self.reloadSection(state)
-            }
+            return self.layoutFactory.makeSectionLayout(section)
         }
-    }
-    
-    private func loadedSection(_ section: Section) -> NSCollectionLayoutSection {
-        switch section {
-        case .imagesOfTheDay:
-            return imagesOfTheDaySection()
-        case .unsplashImages:
-            return unsplashImagesSection()
-        case .buildingImages:
-            return buildingImagesSection()
-        }
-    }
-    
-    func imagesOfTheDaySection() -> NSCollectionLayoutSection {
-        let fractionalWidth: CGFloat = 1 / 3
-        
-        let item = NSCollectionLayoutItem(
-            layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        )
-        
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: .init(widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .fractionalWidth(fractionalWidth)),
-            subitems: [item]
-        )
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 8
-        section.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
-        section.orthogonalScrollingBehavior = .continuous
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(60)
-            ),
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        section.boundarySupplementaryItems = [header]
-        
-        return section
-    }
-    
-    func unsplashImagesSection() -> NSCollectionLayoutSection {
-        let fractionalWidth: CGFloat = 1 / 3
-        
-        let item = NSCollectionLayoutItem(
-            layoutSize: .init(widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .fractionalHeight(1))
-        )
-        
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(fractionalWidth)),
-            subitems: [item]
-        )
-        group.interItemSpacing = .fixed(8)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 8
-        section.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
-        
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(60)
-            ),
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        section.boundarySupplementaryItems = [header]
-        return section
-    }
-    
-    func buildingImagesSection() -> NSCollectionLayoutSection {
-        let fractionalWidth: CGFloat = 1 / 2
-        
-        let item = NSCollectionLayoutItem(
-            layoutSize: .init(widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .fractionalHeight(1))
-        )
-        
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1)),
-            subitems: [item]
-        )
-        group.interItemSpacing = .fixed(8)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 8
-        section.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
-        
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(60)
-            ),
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        section.boundarySupplementaryItems = [header]
-        return section
-    }
-    
-    func reloadSection(_ state: ReloadItemViewState) -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
-        
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(200)),
-            subitems: [item]
-        )
-        
-        let section = NSCollectionLayoutSection(group: group)
-        return section
-        
     }
 }
 

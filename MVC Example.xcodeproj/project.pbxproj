@@ -20,6 +20,8 @@
 		711C20AD2B5FD4B000888574 /* HomeHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 711C20AB2B5FD4B000888574 /* HomeHeaderReusableView.xib */; };
 		711C20B02B610DAF00888574 /* HomeImagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711C20AF2B610DAF00888574 /* HomeImagesService.swift */; };
 		711C20B22B626CCA00888574 /* HomeViewStateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711C20B12B626CCA00888574 /* HomeViewStateFactory.swift */; };
+		711C20B42B62785600888574 /* SquareLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711C20B32B62785600888574 /* SquareLoadingIndicator.swift */; };
+		711C20B62B627BB800888574 /* HomeViewLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711C20B52B627BB800888574 /* HomeViewLayoutFactory.swift */; };
 		713AAFA42B5D1DEC00622415 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713AAFA22B5D1DEC00622415 /* HomeView.swift */; };
 		713AAFA82B5D204A00622415 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 713AAFA72B5D204A00622415 /* Kingfisher */; };
 		713AAFAB2B5D218D00622415 /* ImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713AAFA92B5D218D00622415 /* ImageViewCell.swift */; };
@@ -51,6 +53,8 @@
 		711C20AB2B5FD4B000888574 /* HomeHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHeaderReusableView.xib; sourceTree = "<group>"; };
 		711C20AF2B610DAF00888574 /* HomeImagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeImagesService.swift; sourceTree = "<group>"; };
 		711C20B12B626CCA00888574 /* HomeViewStateFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewStateFactory.swift; sourceTree = "<group>"; };
+		711C20B32B62785600888574 /* SquareLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareLoadingIndicator.swift; sourceTree = "<group>"; };
+		711C20B52B627BB800888574 /* HomeViewLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewLayoutFactory.swift; sourceTree = "<group>"; };
 		713AAFA22B5D1DEC00622415 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		713AAFA92B5D218D00622415 /* ImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; };
 		713AAFAA2B5D218D00622415 /* ImageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewCell.xib; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 				711C209A2B5E8D5C00888574 /* ImageViewCell */,
 				711C20AE2B5FD4B500888574 /* HomeHeaderReusableView */,
 				713AAFA22B5D1DEC00622415 /* HomeView.swift */,
+				711C20B32B62785600888574 /* SquareLoadingIndicator.swift */,
+				711C20B52B627BB800888574 /* HomeViewLayoutFactory.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -275,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				711C20B62B627BB800888574 /* HomeViewLayoutFactory.swift in Sources */,
 				711C20B22B626CCA00888574 /* HomeViewStateFactory.swift in Sources */,
 				711C20A92B5FCA8500888574 /* IdentifiableSource.swift in Sources */,
 				713AAFAE2B5D25AD00622415 /* UIView+Extension.swift in Sources */,
@@ -282,6 +289,7 @@
 				711C209F2B5E8DCB00888574 /* ReloadViewCell.swift in Sources */,
 				713AAFB02B5D2B2C00622415 /* UICollectionView+Extension.swift in Sources */,
 				71FB18BC2B5A75D5008C0777 /* HomeViewController.swift in Sources */,
+				711C20B42B62785600888574 /* SquareLoadingIndicator.swift in Sources */,
 				711C20902B5E734500888574 /* HomeViewState.swift in Sources */,
 				71D0A8F82B5D50ED00E54989 /* IgnorableHashable.swift in Sources */,
 				711C20A32B5FC4C300888574 /* ImagesOfTheDayProvider.swift in Sources */,
