@@ -2,7 +2,7 @@ import Foundation
 
 protocol BuildingImagesProvider {
     func images() async throws -> [BuildingResponse]
-    func deleteImage(_ id: Int) async -> [BuildingResponse]
+    func deleteImage(_ id: Int) async throws -> [BuildingResponse]
 }
 
 class BuildingImagesService: BuildingImagesProvider, UnsplashLinkGenerating {
@@ -34,7 +34,7 @@ class BuildingImagesService: BuildingImagesProvider, UnsplashLinkGenerating {
         }
     }
     
-    func deleteImage(_ id: Int) async -> [BuildingResponse] {
+    func deleteImage(_ id: Int) async throws -> [BuildingResponse] {
         imageIdentifiers.remove(at: id)
         
         let urls = makeLinks(from: imageIdentifiers)

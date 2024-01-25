@@ -18,6 +18,8 @@
 		711C20A92B5FCA8500888574 /* IdentifiableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711C20A82B5FCA8500888574 /* IdentifiableSource.swift */; };
 		711C20AC2B5FD4B000888574 /* HomeHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711C20AA2B5FD4B000888574 /* HomeHeaderReusableView.swift */; };
 		711C20AD2B5FD4B000888574 /* HomeHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 711C20AB2B5FD4B000888574 /* HomeHeaderReusableView.xib */; };
+		711C20B02B610DAF00888574 /* HomeImagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711C20AF2B610DAF00888574 /* HomeImagesService.swift */; };
+		711C20B22B626CCA00888574 /* HomeViewStateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711C20B12B626CCA00888574 /* HomeViewStateFactory.swift */; };
 		713AAFA42B5D1DEC00622415 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713AAFA22B5D1DEC00622415 /* HomeView.swift */; };
 		713AAFA82B5D204A00622415 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 713AAFA72B5D204A00622415 /* Kingfisher */; };
 		713AAFAB2B5D218D00622415 /* ImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713AAFA92B5D218D00622415 /* ImageViewCell.swift */; };
@@ -47,6 +49,8 @@
 		711C20A82B5FCA8500888574 /* IdentifiableSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableSource.swift; sourceTree = "<group>"; };
 		711C20AA2B5FD4B000888574 /* HomeHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderReusableView.swift; sourceTree = "<group>"; };
 		711C20AB2B5FD4B000888574 /* HomeHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHeaderReusableView.xib; sourceTree = "<group>"; };
+		711C20AF2B610DAF00888574 /* HomeImagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeImagesService.swift; sourceTree = "<group>"; };
+		711C20B12B626CCA00888574 /* HomeViewStateFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewStateFactory.swift; sourceTree = "<group>"; };
 		713AAFA22B5D1DEC00622415 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		713AAFA92B5D218D00622415 /* ImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; };
 		713AAFAA2B5D218D00622415 /* ImageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewCell.xib; sourceTree = "<group>"; };
@@ -132,7 +136,9 @@
 			isa = PBXGroup;
 			children = (
 				711C20992B5E8D5600888574 /* Views */,
+				711C20AF2B610DAF00888574 /* HomeImagesService.swift */,
 				71FB18BB2B5A75D5008C0777 /* HomeViewController.swift */,
+				711C20B12B626CCA00888574 /* HomeViewStateFactory.swift */,
 				711C208F2B5E734500888574 /* HomeViewState.swift */,
 				711C20A82B5FCA8500888574 /* IdentifiableSource.swift */,
 			);
@@ -269,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				711C20B22B626CCA00888574 /* HomeViewStateFactory.swift in Sources */,
 				711C20A92B5FCA8500888574 /* IdentifiableSource.swift in Sources */,
 				713AAFAE2B5D25AD00622415 /* UIView+Extension.swift in Sources */,
 				711C20A52B5FC5ED00888574 /* UnsplashLinkGenerating.swift in Sources */,
@@ -285,6 +292,7 @@
 				71FB18B82B5A75D5008C0777 /* AppDelegate.swift in Sources */,
 				713AAFAB2B5D218D00622415 /* ImageViewCell.swift in Sources */,
 				71D0A8FB2B5E65F900E54989 /* UnsplashImageResponse.swift in Sources */,
+				711C20B02B610DAF00888574 /* HomeImagesService.swift in Sources */,
 				71FB18BA2B5A75D5008C0777 /* SceneDelegate.swift in Sources */,
 				713AAFB22B5D2B9300622415 /* UnsplashImagesProvider.swift in Sources */,
 				711C20A72B5FC73900888574 /* ImagesOfTheDayResponse.swift in Sources */,

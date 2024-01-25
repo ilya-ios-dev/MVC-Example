@@ -2,6 +2,7 @@ import Foundation
 
 struct HomeViewState: Hashable {
     let sections: [Section]
+    let showLoadingIndicator: Bool
     
     enum Section: Hashable {
         case imagesOfTheDay(LoadingState)

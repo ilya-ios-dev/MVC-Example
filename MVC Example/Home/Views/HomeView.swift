@@ -37,14 +37,21 @@ class HomeView: UIView {
             snapshot.appendItems(section.items, toSection: section)
         }
         dataSource.apply(snapshot)
+        
+        if viewState.showLoadingIndicator {
+            showLoadingIndicator()
+        }
+        else {
+            hideLoadingIndicator()
+        }
     }
     
-    func showLoadingIndicator() {
+    private func showLoadingIndicator() {
         loadingIndicatorContainer.isHidden = false
         loadingIndicator.startAnimating()
     }
     
-    func hideLoadingIndicator() {
+    private func hideLoadingIndicator() {
         loadingIndicatorContainer.isHidden = true
         loadingIndicator.stopAnimating()
     }
@@ -88,7 +95,7 @@ private extension HomeView {
         }
     }
     
-    func loadedSection(_ section: Section) -> NSCollectionLayoutSection {
+    private func loadedSection(_ section: Section) -> NSCollectionLayoutSection {
         switch section {
         case .imagesOfTheDay:
             return imagesOfTheDaySection()
@@ -202,7 +209,7 @@ private extension HomeView {
 
 // MARK: - Data Source
 private extension HomeView {
-    func createDataSource() -> DataSource {
+    private func createDataSource() -> DataSource {
         let imageCellRegistration = UICollectionView.CellRegistration<ImageViewCell, ImageItemViewState>.createFromNib { cell, _, state in
             cell.render(viewState: state)
             cell.delegate = self
