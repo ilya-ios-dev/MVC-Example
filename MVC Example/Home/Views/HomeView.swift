@@ -6,11 +6,6 @@ protocol HomeViewDelegate: AnyObject {
 }
 
 class HomeView: UIView {
-    private typealias Section = HomeViewState.Section
-    private typealias Item = HomeViewState.Item
-    private typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
-    
     private let layoutFactory: HomeViewLayoutFactory = HomeViewLayoutFactoryImpl()
 
     private let loadingIndicator = SquareLoadingIndicator()
@@ -32,11 +27,6 @@ class HomeView: UIView {
     
     func render(viewState: HomeViewState) {
         self.viewState = viewState
-        var snapshot = Snapshot()
-        snapshot.appendSections(viewState.sections)
-        viewState.sections.forEach { section in
-            snapshot.appendItems(section.items, toSection: section)
-        }
         dataSource.applySnapshot(viewState: viewState)
         
         if viewState.showLoadingIndicator {
