@@ -37,7 +37,7 @@ class HomeView: UIView {
         viewState.sections.forEach { section in
             snapshot.appendItems(section.items, toSection: section)
         }
-        dataSource.apply(snapshot)
+        dataSource.applySnapshot(viewState: viewState)
         
         if viewState.showLoadingIndicator {
             loadingIndicator.showLoadingIndicator()
@@ -69,44 +69,8 @@ private extension HomeView {
 
 // MARK: - Data Source
 private extension HomeView {
-    private func createDataSource() -> DataSource {
-        let imageCellRegistration = UICollectionView.CellRegistration<ImageViewCell, ImageItemViewState>.createFromNib { cell, _, state in
-            cell.render(viewState: state)
-            cell.delegate = self
-        }
-        
-        let reloadCellRegistration = UICollectionView.CellRegistration<ReloadViewCell, ReloadItemViewState>.createFromNib { cell, _, state in
-            cell.render(viewState: state)
-            cell.delegate = self
-        }
-        
-        let headerRegistration = UICollectionView.SupplementaryRegistration<HomeHeaderReusableView>.createHeader { [weak self] header, _, indexPath in
-            guard let self, let section = self.viewState?.sections[indexPath.section] else {
-                return
-            }
-            
-            switch section.loadingState {
-            case .loaded(let state):
-                header.render(state.title)
-            case .needsReload:
-                break
-            }
-        }
-
-        let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, item in
-            switch item {
-            case .imageItem(let state):
-                return collectionView.dequeueConfiguredReusableCell(using: imageCellRegistration, for: indexPath, item: state)
-            case .reloadItem(let state):
-                return collectionView.dequeueConfiguredReusableCell(using: reloadCellRegistration, for: indexPath, item: state)
-            }
-        }
-        
-        dataSource.supplementaryViewProvider = { collectionView, _, indexPath -> UICollectionReusableView? in
-            return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
-        }
-        
-        return dataSource
+    private func createDataSource() -> HomeViewDataSource {
+        return HomeViewDataSourceImpl(collectionView: collectionView, delegate: self)
     }
 }
 
