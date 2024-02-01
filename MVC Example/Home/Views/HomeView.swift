@@ -42,25 +42,18 @@ class HomeView: UIView {
         addConstrainedSubview(collectionView)
         addConstrainedSubview(loadingIndicator)
     }
-}
+    
+    private func createDataSource() -> HomeViewDataSource {
+        return HomeViewDataSourceImpl(collectionView: collectionView, delegate: self)
+    }
 
-
-// MARK: - Layout
-private extension HomeView {
-    func createLayout() -> UICollectionViewCompositionalLayout {
+    private func createLayout() -> UICollectionViewCompositionalLayout {
         return .init { [weak self] index, _ in
             guard let self, let section = self.viewState?.sections[index] else {
                 return nil
             }
             return self.layoutFactory.makeSectionLayout(section)
         }
-    }
-}
-
-// MARK: - Data Source
-private extension HomeView {
-    private func createDataSource() -> HomeViewDataSource {
-        return HomeViewDataSourceImpl(collectionView: collectionView, delegate: self)
     }
 }
 
